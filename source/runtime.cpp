@@ -1031,7 +1031,11 @@ namespace reshade
 				ImGuiWindowFlags_NoFocusOnAppearing);
 
 			ImGui::TextUnformatted("ReShade " VERSION_STRING_FILE " by crosire");
-			ImGui::TextUnformatted("Visit http://reshade.me for news, updates, shaders and discussion.");
+			ImGui::TextUnformatted("Visit https://reshade.me for news, updates, shaders and discussion.");
+			
+			//ImGui::TextUnformatted(" ");
+			//ImGui::TextUnformatted("Support for chaining DLL wrappers implemented by Sean Pesce");
+			//ImGui::TextUnformatted("Visit https://github.com/SeanPesce for other projects.");
 
 			ImGui::Spacing();
 

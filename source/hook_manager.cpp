@@ -13,6 +13,7 @@
 #include <Windows.h>
 
 extern HMODULE g_module_handle;
+extern std::vector<std::string> g_chained_dlls;
 
 namespace reshade::hooks
 {
@@ -442,7 +443,15 @@ namespace reshade::hooks
 		const auto target_filename = target_path.filename_without_extension();
 		const auto replacement_filename = filesystem::get_module_path(g_module_handle).filename_without_extension();
 
-		if (target_filename == replacement_filename)
+
+		// Check if the module was specified as a chained wrapper DLL in the config file
+		bool is_chain = false;
+		for (auto chain : g_chained_dlls)
+			if (target_filename == (filesystem::path(chain.c_str()).filename_without_extension()))
+				is_chain = true;
+
+
+		if ((target_filename == replacement_filename) || is_chain)
 		{
 			LOG(INFO) << "> Delayed until first call to an exported function.";
 
